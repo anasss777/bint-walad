@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Marhey:wght@300..700&family=Vibes&display=swap");
+
+@layer components {
+  .btn {
+    @apply h-fit w-fit px-4 py-1 text-white rounded-md cursor-pointer hover:bg-opacity-70 transition-all duration-300 ease-linear;
+  }
+}
+
+.rtl {
+  direction: rtl !important;
+}
+
+.ltr {
+  direction: ltr !important;
+}
+
+/* Slow spin */
+@keyframes slow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-slow-spin {
+  animation: slow-spin 5s linear infinite;
+}
