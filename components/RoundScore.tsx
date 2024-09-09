@@ -1,13 +1,6 @@
 "use client";
 
-import firebase from "@/firebase";
-import { Player } from "@/types/player";
-import {
-  addRoundToPlayer,
-  addScoreToRound,
-  goNextRound,
-  roundUp,
-} from "@/utils/room";
+import { addRoundToPlayer, addScoreToRound, goNextRound } from "@/utils/room";
 import { Button } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
@@ -92,6 +85,12 @@ const RoundScore = ({ roomId, isHost, currentRound }: Props) => {
     );
     addScoreToRound(roomId, playerId, scoreSum, currentRound);
     setIsFinishScoring(true);
+    localStorage.setItem("boyAnswer", "");
+    localStorage.setItem("girlAnswer", "");
+    localStorage.setItem("plantAnswer", "");
+    localStorage.setItem("inanimateObjectAnswer", "");
+    localStorage.setItem("animalAnswer", "");
+    localStorage.setItem("countryAnswer", "");
   };
 
   const nextRound = () => {
@@ -159,22 +158,24 @@ const RoundScore = ({ roomId, isHost, currentRound }: Props) => {
   };
 
   return (
-    <div className="text-white flex flex-col justify-center items-center gap-10 w-full px-1">
+    <div className="text-white flex flex-col justify-center items-center gap-10 h-full min-h-screen w-full px-1">
       <p>النقاط: {scoreSum}</p>
 
-      <div className="text-white flex flex-col justify-center items-center gap-6 w-full">
-        {renderScoreButtons(boyAnswer, "boy", "ولد", scores.boy)}
-        {renderScoreButtons(girlAnswer, "girl", "بنت", scores.girl)}
-        {renderScoreButtons(plantAnswer, "plant", "نبات", scores.plant)}
-        {renderScoreButtons(
-          inanimateObjectAnswer,
-          "inanimateObject",
-          "جماد",
-          scores.inanimateObject
-        )}
-        {renderScoreButtons(animalAnswer, "animal", "حيوان", scores.animal)}
-        {renderScoreButtons(countryAnswer, "country", "بلاد", scores.country)}
-      </div>
+      {!isFinishScoring && (
+        <div className="text-white flex flex-col justify-center items-center gap-6 w-full">
+          {renderScoreButtons(boyAnswer, "boy", "ولد", scores.boy)}
+          {renderScoreButtons(girlAnswer, "girl", "بنت", scores.girl)}
+          {renderScoreButtons(plantAnswer, "plant", "نبات", scores.plant)}
+          {renderScoreButtons(
+            inanimateObjectAnswer,
+            "inanimateObject",
+            "جماد",
+            scores.inanimateObject
+          )}
+          {renderScoreButtons(animalAnswer, "animal", "حيوان", scores.animal)}
+          {renderScoreButtons(countryAnswer, "country", "بلاد", scores.country)}
+        </div>
+      )}
 
       {isFinishScoring ? (
         <p>يرجى الانتظار حتى ينتهي اللاعبون الآخرون</p>

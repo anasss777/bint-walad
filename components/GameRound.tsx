@@ -21,12 +21,6 @@ const GameRound = ({ roomId, isRoundUp, room }: Props) => {
 
   const handleRoundUp = () => {
     roundUp(roomId, isRoundUp);
-    setBoy("");
-    setGirl("");
-    setPlant("");
-    setInanimateObject("");
-    setAnimal("");
-    setCountry("");
   };
   const handleBoy = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
